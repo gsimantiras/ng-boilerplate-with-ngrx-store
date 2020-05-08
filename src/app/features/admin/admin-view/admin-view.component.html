@@ -1,7 +1,7 @@
 <div *ngIf="user$ | async as user" style="margin: 20px;">
   <div *ngIf="user.username">
     <p>Welcome {{ user.username }}</p>
-    <input type="text" ([value])="(userName)" />
+    <!-- <input type="text" ([value])="(userName)" /> -->
     <button mat-flat-button color="primary" (click)="changeUserName(userName)">
       change
     </button>
