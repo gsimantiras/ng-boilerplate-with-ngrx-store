@@ -1,0 +1,8 @@
+<div style="margin: 15px;">
+  <div *ngIf="(loading$ | async)">
+    Loading
+  </div>
+  <div *ngFor="let item of posts$ | async" style="padding: 10px 5px;">
+    <app-post [post]="item"></app-post>
+  </div>
+</div>

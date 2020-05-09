@@ -1,0 +1,20 @@
+<div>
+    <mat-card>
+        <!-- <mat-card-header> -->
+        <span>
+            {{user.username}}
+        </span>
+        <!-- </mat-card-header> -->
+        <mat-card-title>
+            {{ post.title }}
+        </mat-card-title>
+        <mat-card-content>
+            {{ post.body }}
+        </mat-card-content>
+        <mat-card-footer style="margin: 0px; text-align: left;">
+            <span *ngIf="commentsNumber" (click)="loadComments()">
+                {{commentsNumber}} comments
+            </span>
+        </mat-card-footer>
+    </mat-card>
+</div>

@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { StoreModule } from '@ngrx/store';
 import * as fromUser from './stores/user/user.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [MainLayoutComponent],
@@ -15,13 +17,15 @@ import * as fromUser from './stores/user/user.reducer';
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule,
-
+    HttpClientModule,
+    
     // material
     MatToolbarModule,
     MatButtonModule,
 
     // ngrx
     StoreModule.forRoot({ user: fromUser.reducer }),
+    EffectsModule.forRoot()
   ],
   exports: [MainLayoutComponent],
 })
