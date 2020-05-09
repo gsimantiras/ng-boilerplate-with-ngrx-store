@@ -1,7 +1,7 @@
-import { PostsActions } from './dashboard.actions';
+import { PostsActions } from './posts.actions';
 
 import { createReducer, on, Action } from '@ngrx/store';
-import { IPost } from '../models/post';
+import { IPost } from '../shared/post.model';
 
 export const dashboardFeatureKey = 'dashboard';
 
@@ -10,19 +10,12 @@ export interface DashboardState {
 }
 
 export const initialState: DashboardState = {
-  posts: [
-    {
-      id: 1,
-      body: 'This is the first and only dummy post',
-      title: 'Welcome to my Blog',
-      date: new Date(2020, 5, 8),
-    },
-  ],
+  posts: [],
 };
 
 const blogReducer = createReducer(
   initialState,
-  on(PostsActions.getPosts, (state, { posts }) => {
+  on(PostsActions.lostPosts, (state, { posts }) => {
     return { ...state, posts };
   })
 );

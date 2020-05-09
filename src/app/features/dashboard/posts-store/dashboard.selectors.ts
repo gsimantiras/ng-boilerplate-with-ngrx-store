@@ -1,6 +1,6 @@
 import { dashboardFeatureKey } from './dashboard.reducer';
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { DashboardState } from 'src/app/features/dashboard/dashboard-store/dashboard.reducer';
+import { DashboardState } from 'src/app/features/dashboard/posts-store/dashboard.reducer';
 
 export const selectPostState = createFeatureSelector<DashboardState>(
   dashboardFeatureKey

@@ -1,9 +1,10 @@
-import { DashboardState } from '../dashboard-store/dashboard.reducer';
-import { IPost } from './../models/post';
+import { PostsActionsTypes } from '../posts-store/posts.actions';
+import { DashboardState } from '../posts-store/dashboard.reducer';
+import { IPost } from '../shared/post.model';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { selectPosts } from '../dashboard-store/dashboard.selectors';
+import { selectPosts } from '../posts-store/dashboard.selectors';
 
 @Component({
   selector: 'app-dashboard-view',
@@ -16,6 +17,7 @@ export class DashboardViewComponent implements OnInit {
   constructor(private store: Store<{ user: DashboardState }>) {}
 
   ngOnInit() {
-    this.posts$ = this.store.pipe(select(selectPosts));
+    this.store.dispatch({ type: PostsActionsTypes.lostPosts });
+    // this.posts$ = this.store.pipe(select(selectPosts));
   }
 }
