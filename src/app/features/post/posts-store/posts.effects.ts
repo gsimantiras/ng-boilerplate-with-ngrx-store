@@ -14,13 +14,15 @@ export class PostsEffects {
       ofType(PostsActionsTypes.loadPosts),
       mergeMap(() =>
         this.postsService.getAll().pipe(
-          map((posts) => { 
+          map((posts) => {
             return {
               type: PostsActionsTypes.postsLoadSuccess,
               posts,
-            }
-          }), catchError(() => of({ type: PostsActionsTypes.postsLoadError }))) 
-      ) 
+            };
+          }),
+          catchError(() => of({ type: PostsActionsTypes.postsLoadError }))
+        )
+      )
     )
   );
 

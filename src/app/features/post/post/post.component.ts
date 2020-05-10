@@ -11,26 +11,31 @@ import { User } from 'src/app/core/shared/user.model';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss']
+  styleUrls: ['./post.component.scss'],
 })
 export class PostComponent implements OnInit {
   @Input() post: Post;
   commentsNumber: number;
   user: any = {
-    username: 'User'
+    username: 'User',
   };
 
-  constructor(private store: Store<{ state: PostState }>,
+  constructor(
+    private store: Store<{ state: PostState }>,
     private postService: PostsService,
-    private userService: UserService) { }
+    private userService: UserService
+  ) {}
 
-  loadComments(){
+  loadComments() {
     // this.store.dispatch({type: '' })
   }
 
   ngOnInit() {
-    this.postService.getPostComments(this.post.id).subscribe(comments => this.commentsNumber = comments.length);
-    this.userService.getUser(this.post.userId).subscribe(user => this.user = user);
+    this.postService
+      .getPostComments(this.post.id)
+      .subscribe((comments) => (this.commentsNumber = comments.length));
+    this.userService
+      .getUser(this.post.userId)
+      .subscribe((user) => (this.user = user));
   }
-
 }

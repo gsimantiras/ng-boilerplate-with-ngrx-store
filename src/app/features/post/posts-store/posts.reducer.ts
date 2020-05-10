@@ -7,12 +7,12 @@ export const postFeatureKey = 'post';
 
 export interface PostState {
   posts: Post[];
-  isLoading?: boolean
+  isLoading?: boolean;
 }
 
 export const initialState: PostState = {
   posts: [],
-  isLoading: false
+  isLoading: false,
 };
 
 const blogReducer = createReducer(
@@ -25,7 +25,7 @@ const blogReducer = createReducer(
   }),
   on(PostsActions.postsLoadError, (state) => {
     return { ...state, isLoading: false };
-  }),
+  })
 );
 
 export function reducer(state: PostState | undefined, action: Action) {

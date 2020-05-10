@@ -19,10 +19,7 @@ import { PostComponent } from './post/post.component';
     PostRoutingModule,
 
     // ngrx
-    StoreModule.forFeature(
-      fromPost.postFeatureKey,
-      fromPost.reducer
-    ),
+    StoreModule.forFeature(fromPost.postFeatureKey, fromPost.reducer),
     EffectsModule.forFeature([PostsEffects]),
   ],
   providers: [PostsService],

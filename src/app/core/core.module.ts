@@ -18,14 +18,14 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     RouterModule,
     HttpClientModule,
-    
+
     // material
     MatToolbarModule,
     MatButtonModule,
 
     // ngrx
     StoreModule.forRoot({ user: fromUser.reducer }),
-    EffectsModule.forRoot()
+    EffectsModule.forRoot(),
   ],
   exports: [MainLayoutComponent],
 })

@@ -15,7 +15,7 @@ import { Post } from '../shared/post.model';
 export class PostListComponent implements OnInit {
   posts$: Observable<Post[]> = this.store.pipe(select(selectPosts));
   loading$: Observable<boolean> = this.store.pipe(select(selectLoading));
- 
+
   constructor(private store: Store<{ state: PostState }>) {}
 
   ngOnInit() {

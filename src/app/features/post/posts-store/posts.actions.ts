@@ -10,10 +10,18 @@ export const PostsActionsTypes = {
 
 const lostPosts = createAction(PostsActionsTypes.loadPosts);
 
-const postsLoadSuccess = createAction(PostsActionsTypes.postsLoadSuccess, props<PostState>());
+const postsLoadSuccess = createAction(
+  PostsActionsTypes.postsLoadSuccess,
+  props<PostState>()
+);
 
 const postsLoadError = createAction(PostsActionsTypes.postsLoadError);
 
 const postSetComments = createAction(PostsActionsTypes.postSetComments);
 
-export const PostsActions = { lostPosts, postsLoadSuccess, postsLoadError, postSetComments };
+export const PostsActions = {
+  lostPosts,
+  postsLoadSuccess,
+  postsLoadError,
+  postSetComments,
+};

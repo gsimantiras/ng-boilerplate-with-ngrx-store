@@ -15,9 +15,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () =>
-      import('./features/post/post.module').then(
-        (m) => m.PostModule
-      ),
+      import('./features/post/post.module').then((m) => m.PostModule),
   },
   {
     path: 'admin',

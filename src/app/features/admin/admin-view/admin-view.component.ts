@@ -27,9 +27,7 @@ export class AdminViewComponent implements OnInit {
   }
 
   changeUserName(event) {
-    this.store.dispatch(
-      UserActions.changeUserName({ username: 'jimbo' })
-    );
+    this.store.dispatch(UserActions.changeUserName({ username: 'jimbo' }));
   }
 
   logout() {
