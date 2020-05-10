@@ -4,9 +4,6 @@ import { Store } from '@ngrx/store';
 import { Post } from '../shared/post.model';
 import { PostState } from '../posts-store/posts.reducer';
 import { PostsService } from '../shared/posts.service';
-import { Observable } from 'rxjs';
-import { UserService } from 'src/app/core/shared/user.service';
-import { User } from 'src/app/core/shared/user.model';
 
 @Component({
   selector: 'app-post',
@@ -23,7 +20,7 @@ export class PostComponent implements OnInit {
   constructor(
     private store: Store<{ state: PostState }>,
     private postService: PostsService,
-    private userService: UserService
+    // private userService: UserService
   ) {}
 
   loadComments() {
@@ -34,8 +31,8 @@ export class PostComponent implements OnInit {
     this.postService
       .getPostComments(this.post.id)
       .subscribe((comments) => (this.commentsNumber = comments.length));
-    this.userService
-      .getUser(this.post.userId)
-      .subscribe((user) => (this.user = user));
+    // this.userService
+    //   .getUser(this.post.userId)
+    //   .subscribe((user) => (this.user = user));
   }
 }

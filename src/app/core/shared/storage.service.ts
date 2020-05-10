@@ -9,7 +9,9 @@ export class StorageService {
   constructor() {}
 
   setItem(key: string, value: any): any {
-    if (typeof value !== 'string') value = JSON.stringify(value);
+    if (typeof value !== 'string') {
+      value = JSON.stringify(value);
+    }
     this.storage.setItem(key, value);
     return this.getItem(key);
   }
@@ -22,8 +24,8 @@ export class StorageService {
     const item = this.getItem(key);
     if (item != null) {
       try {
-        if (typeof item === 'string') return JSON.parse(item);
-        else return item;
+        if (typeof item === 'string') { return JSON.parse(item); }
+        else { return item; }
       } catch (error) {
         this.removeItem(key);
         console.error(`item ${key} was not found`);

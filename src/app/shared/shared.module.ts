@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
 import { ListComponent } from './list/list.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ListComponent],
@@ -13,6 +14,7 @@ import { ListComponent } from './list/list.component';
     // vendor
     CommonModule,
     RouterModule,
+    FormsModule,
 
     // material
     MatCardModule,
@@ -22,6 +24,7 @@ import { ListComponent } from './list/list.component';
     // vendor
     CommonModule,
     RouterModule,
+    FormsModule,
 
     // material
     MatCardModule,

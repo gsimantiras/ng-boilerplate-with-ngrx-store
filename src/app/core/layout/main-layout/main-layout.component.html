@@ -1,31 +1,7 @@
-<mat-toolbar color="primary">
-  <span>{{ title }}</span>
-  <!-- <button mat-flat-button color="primary" routerLinkActive="active" routerLink="home">
-    Home
-  </button> -->
-  <button
-    mat-flat-button
-    color="primary"
-    routerLinkActive="active"
-    routerLink="dashboard"
-  >
-    Dashboard
-  </button>
-  <button
-    mat-flat-button
-    color="primary"
-    routerLinkActive="active"
-    routerLink="admin"
-  >
-    Admin
-  </button>
-  <div style="width: 100%; text-align: right; font-size: 16px;">
-    <p *ngIf="userName$ | async as user">
-      {{ user }}
-    </p>
-  </div>
-</mat-toolbar>
+<app-navbar></app-navbar>
 
-<main>
+<main class="container">
   <router-outlet></router-outlet>
 </main>
+
+<!-- <app-footer></app-footer> -->

@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>{{ title }}</span>
+    <div class="w-100 text-right" *ngIf="state$ | async as state">
+      <div *ngIf="state?.authState?.username">
+        <span>{{ state?.authState?.username }}</span>
+        <button mat-button (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
