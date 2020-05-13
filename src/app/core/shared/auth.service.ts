@@ -1,37 +1,26 @@
 import { AuthActions } from './auth-store/auth.actions';
 import { Injectable } from '@angular/core';
 
-import { delay, map, tap } from 'rxjs/operators';
+import { delay } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
 import { User } from 'src/app/core/shared/user.model';
 import { StorageService } from './storage.service';
-import { Store, select } from '@ngrx/store';
-import { AuthState } from './auth-store/auth.reducer';
-import { selectAuthState } from './auth-store/auth.selectors';
 
 const mockUser: User = {
   username: 'george',
   token: 'qwerASDF!@#$ZXCV',
 };
-const fakeDelay = 0;
+const fakeDelay = 500;
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    private storage: StorageService,
-    private store: Store<{ state: AuthState }>
-  ) {}
+  constructor(private storage: StorageService) {}
 
   isAuthenticated(): boolean {
     const token = this.storage.getItem('my-auth-token');
-    this.store.pipe(select(selectAuthState)).subscribe((state) => {
-      if (!!token && !state) {
-        this.store.dispatch(AuthActions.loginWithToken({ user: { token } }));
-      }
-    });
     return !!token;
   }
 
@@ -45,9 +34,8 @@ export class AuthService {
     return of(mockUser).pipe(delay(fakeDelay));
   }
 
-  logout(user: User): Observable<User> {
-    console.log('log out User', user);
-    return of({});
-    // .pipe(delay(fakeDelay));
+  logout(): Observable<User> {
+    console.warn('log out User');
+    return of({}).pipe(delay(fakeDelay));
   }
 }

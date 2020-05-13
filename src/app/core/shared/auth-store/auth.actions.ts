@@ -43,12 +43,9 @@ const changeUserName = createAction(
 //#endregion login
 
 //#region logout
-const logout = createAction(AuthActionTypes.logout, props<{ user: User }>());
+const logout = createAction(AuthActionTypes.logout);
 
-const logoutSuccess = createAction(
-  AuthActionTypes.logoutSuccess,
-  props<{ user: User }>()
-);
+const logoutSuccess = createAction(AuthActionTypes.logoutSuccess);
 
 const logoutError = createAction(
   AuthActionTypes.logoutError,

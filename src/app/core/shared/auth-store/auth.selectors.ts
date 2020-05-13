@@ -23,12 +23,9 @@ export const selectAuthState = createSelector(
   selectState,
   (state: AuthState) => {
     return state.user.username;
-  } // todo change to state.authStata
+  }
 );
 
-export const selectToken = createSelector(
-  selectState,
-  (state: AuthState) => {
-    return state;
-  } // todo change to state.authStata
-);
+export const selectToken = createSelector(selectState, (state: AuthState) => {
+  return state;
+});

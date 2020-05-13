@@ -1,10 +1,12 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="app-nav-bar">
   <mat-toolbar-row>
     <span>{{ title }}</span>
     <div class="w-100 text-right" *ngIf="state$ | async as state">
       <div *ngIf="state?.authState?.username">
         <span>{{ state?.authState?.username }}</span>
-        <button mat-button (click)="logout()">Logout</button>
+        <button title="logout" mat-button (click)="logout()">
+          <i class="fa fa-sign-out"></i>
+        </button>
       </div>
     </div>
   </mat-toolbar-row>

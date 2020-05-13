@@ -1,12 +1,17 @@
+import { AuthActions } from './../../shared/auth-store/auth.actions';
+import { selectToken } from './../../shared/auth-store/auth.selectors';
 import { Component, OnInit } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { selectState } from '../../shared/auth-store/auth.selectors';
+import {
+  selectState,
+  selectUserName,
+} from '../../shared/auth-store/auth.selectors';
 import { AuthService } from '../../shared/auth.service';
 import { AuthState } from '../../shared/auth-store/auth.reducer';
-import { AuthActions } from '../../shared/auth-store/auth.actions';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +20,7 @@ import { AuthActions } from '../../shared/auth-store/auth.actions';
 })
 export class NavbarComponent implements OnInit {
   title = 'App';
-  state$: Observable<AuthState>;
+  state$: Observable<AuthState> = this.store.pipe(select(selectState));
 
   constructor(
     private store: Store<{ state: AuthState }>,
@@ -23,10 +28,15 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   logout() {
-    this.store.dispatch(AuthActions.logout({ user: {} }));
+    this.store.dispatch(AuthActions.logout());
   }
 
   ngOnInit() {
-    this.state$ = this.store.pipe(select(selectState));
+    this.store.pipe(select(selectState), take(1)).subscribe((state) => {
+      const token = localStorage.getItem('my-auth-token');
+      if (token && state.user.username === '') {
+        this.store.dispatch(AuthActions.loginWithToken({ user: { token } }));
+      }
+    });
   }
 }

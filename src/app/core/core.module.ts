@@ -17,7 +17,6 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import * as fromAuth from './shared/auth-store/auth.reducer';
-import { AuthGuardService } from './shared/auth-guard.service';
 
 @NgModule({
   declarations: [

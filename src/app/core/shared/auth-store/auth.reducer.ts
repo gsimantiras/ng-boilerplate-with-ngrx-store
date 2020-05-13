@@ -46,11 +46,7 @@ const userReducer = createReducer(
   })),
 
   on(AuthActions.logout, () => initialState),
-  on(AuthActions.logoutSuccess, (state, action) => ({
-    ...state,
-    authState: action.user,
-    loading: false,
-  })),
+  on(AuthActions.logoutSuccess, () => (initialState)),
   on(AuthActions.logoutError, (state) => ({ ...state, loading: false })),
 
   on(AuthActions.signup, (state, action) => ({

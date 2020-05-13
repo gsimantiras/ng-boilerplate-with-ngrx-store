@@ -21,11 +21,16 @@ const blogReducer = createReducer(
     return { ...state, isLoading: true };
   }),
   on(PostsActions.postsLoadSuccess, (state, { posts }) => {
-    return { ...state, posts, isLoading: false };
+    return {
+      ...state,
+      posts,
+      isLoading: false,
+    };
   }),
   on(PostsActions.postsLoadError, (state) => {
     return { ...state, isLoading: false };
-  })
+  }),
+  on(PostsActions.clearPosts, () => initialState)
 );
 
 export function reducer(state: PostState | undefined, action: Action) {

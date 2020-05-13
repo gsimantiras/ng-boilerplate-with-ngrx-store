@@ -1,8 +1,12 @@
-<div style="margin: 15px;">
-  <div *ngIf="loading$ | async">
-    Loading
+<div class="row h-100 my-3">
+  <div *ngIf="loading$ | async" class="d-flex w-100 h-100 col-xs-12">
+    <div class="spinner-border text-primary m-auto" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
-  <div *ngFor="let item of posts$ | async" style="padding: 10px 5px;">
-    <app-post [post]="item"></app-post>
+  <div *ngIf="!(loading$ | async)" class="col-xs-12 cl-sm-8" >
+    <div *ngFor="let item of posts$ | async" class="mb-3">
+      <app-post class="w-100" [post]="item"></app-post>
+    </div>
   </div>
 </div>

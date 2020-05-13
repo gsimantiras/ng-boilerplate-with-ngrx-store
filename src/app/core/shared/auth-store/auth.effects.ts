@@ -18,8 +18,21 @@ export class AuthEffects {
       exhaustMap((action) =>
         this.authService.login(action.user).pipe(
           map((user) => {
-            // this.storage.setItem('my-auth-token', user.token); // todo save token
-            // this.router.navigate(['dashboard']);
+            return AuthActions.loginSuccess({ user });
+          }),
+          catchError((error) => of(AuthActions.loginError({ error })))
+        )
+      )
+    )
+  );
+
+  loginWithToken$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginWithToken),
+      take(1),
+      exhaustMap((action) =>
+        this.authService.login(action.user).pipe(
+          map((user) => {
             return AuthActions.loginSuccess({ user });
           }),
           catchError((error) => of(AuthActions.loginError({ error })))
@@ -33,25 +46,10 @@ export class AuthEffects {
     ofType(AuthActionTypes.loginSuccess),
     map((action: any) => action),
     tap((action: AuthState) => {
-      this.storage.setItem('my-auth-token', action.user.token); // todo save token
+      this.storage.setItem('my-auth-token', action.user.token);
+      this.storage.setItem('auth-state', action.user);
       this.router.navigate(['dashboard']);
     })
-  );
-
-  loginWithToken$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.loginWithToken),
-      exhaustMap((action) =>
-        this.authService.login(action.user).pipe(
-          map((user) => {
-            // this.storage.setItem('my-auth-token', user.token); // todo save token
-            // this.router.navigate(['dashboard']);
-            return AuthActions.loginSuccess({ user });
-          }),
-          catchError((error) => of(AuthActions.loginError({ error })))
-        )
-      )
-    )
   );
 
   signup$ = createEffect(() =>
@@ -60,8 +58,6 @@ export class AuthEffects {
       exhaustMap((action) =>
         this.authService.signUp(action.user).pipe(
           map((user) => {
-            // this.storage.setItem('my-auth-token', user.token); // todo save token
-            // this.router.navigate(['dashboard']);
             return AuthActions.signupSuccess({ user });
           }),
           catchError((error) => of(AuthActions.signupError({ error })))
@@ -70,13 +66,13 @@ export class AuthEffects {
     )
   );
 
-
   @Effect({ dispatch: false })
   signupSuccess$ = this.actions$.pipe(
     ofType(AuthActionTypes.signupSuccess),
     map((action: any) => action),
     tap((action: AuthState) => {
-      this.storage.setItem('my-auth-token', action.user.token); // todo save token
+      this.storage.setItem('my-auth-token', action.user.token);
+      this.storage.setItem('auth-state', action.user);
       this.router.navigate(['dashboard']);
     })
   );
@@ -84,17 +80,26 @@ export class AuthEffects {
   logout$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.logout),
-      exhaustMap((action) =>
-        this.authService.logout(action.user).pipe(
-          map((user) => {
-            this.storage.removeItem('my-auth-token');
-            this.router.navigate(['login']);
-            return AuthActions.logoutSuccess({ user });
-          }),
-          catchError((error) => of(AuthActions.logoutError({ error })))
-        )
-      )
+      tap(() => {
+        this.authService.logout();
+        this.storage.removeItem('my-auth-token');
+        this.storage.removeItem('auth-state');
+        this.router.navigate(['login']);
+      }),
+      map(() => {
+        return { type: 'NO_ACTION' };
+      })
     )
+  );
+
+  @Effect({ dispatch: false })
+  logoutSuccess$ = this.actions$.pipe(
+    ofType(AuthActionTypes.logoutSuccess),
+    tap(() => this.storage.removeItem('my-auth-token')),
+    map(() => {
+      this.storage.removeItem('my-auth-token');
+      return this.router.navigate(['login']);
+    })
   );
 
   constructor(

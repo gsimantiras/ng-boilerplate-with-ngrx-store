@@ -23,6 +23,7 @@ const fakeDelay = 500;
 
 @Injectable()
 export class PostsService {
+
   constructor(private http: HttpClient) {}
 
   private url = environment.url;
@@ -31,8 +32,8 @@ export class PostsService {
   getAll(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.url}/${this.postsEndPoint}`).pipe(
       map((posts) => {
-        let arr1 = posts.slice(0, 5);
-        let arr2 = posts.slice(10, 15);
+        const arr1 = posts.slice(0, 5);
+        const arr2 = posts.slice(10, 15);
         return [...arr1, ...arr2];
       }),
       delay(fakeDelay)
@@ -49,4 +50,5 @@ export class PostsService {
     return of(mockComments);
     // return this.http.get<Comment[]>(`${this.url}/${this.postsEndPoint}/${id}/comments`).pipe(delay(fakeDelay));
   }
+
 }
